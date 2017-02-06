@@ -1,4 +1,4 @@
-package com.github.viperdream.handlers;
+package com.github.handlers;
 
 import com.github.ecobalance.Pollution;
 

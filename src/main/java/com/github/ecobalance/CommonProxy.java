@@ -1,8 +1,8 @@
 package com.github.ecobalance;
 
 import com.github.ecobalance.item.ModItems;
-import com.github.viperdream.handlers.BlockPlaceHandler;
-import com.github.viperdream.handlers.PlayerInteractHandler;
+import com.github.handlers.BlockPlaceHandler;
+import com.github.handlers.PlayerInteractHandler;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
