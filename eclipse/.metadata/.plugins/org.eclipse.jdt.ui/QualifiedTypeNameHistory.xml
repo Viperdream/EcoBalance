@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.Mod.EventHandler"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.event.FMLInitializationEvent"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.Mod"/>
+<fullyQualifiedTypeName name="net.minecraft.item.Item"/>
+<fullyQualifiedTypeName name="net.minecraft.creativetab.CreativeTabs"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.SidedProxy"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.event.FMLPreInitializationEvent"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.event.FMLPostInitializationEvent"/>
+<fullyQualifiedTypeName name="com.github.ecobalance.item.ModItems"/>
+<fullyQualifiedTypeName name="akka.Main"/>
+<fullyQualifiedTypeName name="net.minecraft.client.main.Main"/>
+<fullyQualifiedTypeName name="com.sun.org.apache.xml.internal.security.encryption.Reference"/>
+<fullyQualifiedTypeName name="com.github.ecobalance.EcoBalance"/>
+</qualifiedTypeNameHistroy>

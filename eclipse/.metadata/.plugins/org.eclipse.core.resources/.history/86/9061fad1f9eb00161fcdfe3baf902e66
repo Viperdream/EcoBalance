@@ -1,0 +1,7 @@
+package com.github.ecobalance.common.items;
+
+import net.minecraft.item.Item;
+
+public class ClimateMeter extends Item {
+	
+}

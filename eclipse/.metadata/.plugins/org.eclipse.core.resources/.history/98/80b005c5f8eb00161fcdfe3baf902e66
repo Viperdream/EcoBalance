@@ -1,0 +1,5 @@
+package com.github.ecobalance.common.items;
+
+public class ClimateMeter {
+
+}

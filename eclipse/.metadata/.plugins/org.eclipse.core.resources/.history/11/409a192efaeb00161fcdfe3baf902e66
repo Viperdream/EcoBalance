@@ -1,0 +1,12 @@
+package com.github.ecobalance.item;
+
+import net.minecraft.item.Item;
+
+public final class ModItems {
+	
+	public static Item ClimateMeter;
+	
+	public static final void init(){
+		climateMeter = new Item();
+	}
+}

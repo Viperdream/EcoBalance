@@ -1,0 +1,15 @@
+package com.github.ecobalance.item;
+
+import net.minecraft.item.Item;
+
+public final class ModItems {
+	
+	public static Item climateMeter;
+	
+	public static final void init(){
+		climateMeter = new Item();
+		
+		climateMeter.setUnlocalizedName("Climate Meter");
+		climateMeter.setCreativeTab(CreativeTabs.tabMisc);
+	}
+}

@@ -1,0 +1,21 @@
+package com.github.ecobalance.item;
+
+import com.github.ecobalance.EcoBalance;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
+public final class ModItems {
+	
+	public static Item climateMeter; //meter to show the local and global ecobalance
+	
+	public static final void init(){
+		climateMeter = new Item();
+		
+		climateMeter.setUnlocalizedName("climateMeter")
+					.setCreativeTab(CreativeTabs.tabMisc)  //currently in the misc. tab, gotta change that
+					.setTextureName(EcoBalance.MODID + ":climateMeter");
+		GameRegistry.registerItem(climateMeter, "Climate Meter");
+	}
+}

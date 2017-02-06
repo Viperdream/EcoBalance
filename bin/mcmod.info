@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ecobalance",
+  "name": "EcoBalance",
+  "description": "Adds consequences to polluting the Minecraft environment",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Viperdream"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
