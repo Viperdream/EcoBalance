@@ -24,7 +24,7 @@ public class BlockPlaceHandler {
 			int z = e.z;
 			World w = e.world; //just world gives net.minecraft.world.WorldServer@40460366
 			
-			Pollution.addCoordsToMap(w, x, y, z, id);
+			//Pollution.addCoordsToMap(w, x, y, z, id);
 			
 		}
 		
