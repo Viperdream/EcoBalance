@@ -1,7 +1,7 @@
 package com.github.ecobalance.util;
 
 import com.github.ecobalance.ChunkEcoValues;
-
+import com.github.ecobalance.Pollution;
 import net.minecraft.world.chunk.Chunk;
 
 public class CalcEcoValues {
@@ -18,36 +18,6 @@ public class CalcEcoValues {
 		double neighborIndex;
 		//so using a try catch in a loop gives an infinite loop
 		
-		/*while(x < 2 ){
-			while(z < 2){
-				newX = originalX + x;
-				newZ = originalZ + z;
-				System.out.println("X: " + newX + ",Z: " + newZ);
-				System.out.println("X counter: " + x + ",Z counter:" + z );
-				
-				newCoords = newX + "," + newZ;
-				if(newCoords != coords){
-					ChunkEcoValues cv;
-					Chunk newC = c.worldObj.getChunkFromBlockCoords(newX, newZ);
-					
-					if(new ChunkEcoValues(newC).equals(null)){
-						System.out.println("Null returned when calculating a neighbor's index, using default values");
-						cv = new ChunkEcoValues(newC, 105, 105, 0, 0, 1); //TODO: make this a method
-					}else{
-						cv = new ChunkEcoValues(newC);
-					}
-					
-					if(cv.getEcoBalance() != 0){
-						totalBalance = totalBalance + (cv.getEcoBalance()/100); //has to be divided by 100, because it has to stay between 0.1 and 2
-					}else{
-						totalBalance++;
-					}
-				}
-				z++;
-			}
-			x++;
-		}*/
-		
 		for (z= -1; z<2; z++){ //z coordinate	
 			for(x = -1; x<2; x++){ //x coordinate
 				newX = originalX + x;
@@ -56,14 +26,15 @@ public class CalcEcoValues {
 				
 				newCoords = newX + "," + newZ;
 				if(newCoords != coords){
-					ChunkEcoValues cv;
+					ChunkEcoValues cv = new ChunkEcoValues();
 					Chunk newC = c.worldObj.getChunkFromBlockCoords(newX, newZ);
+					String nCoords = newX + "," + newZ;
 					
-					if(new ChunkEcoValues(newC).equals(null)){
+					if(!Pollution.pollutedChunks.containsKey(nCoords)){
 						System.out.println("Null returned when calculating a neighbor's index, using default values");
-						cv = new ChunkEcoValues(newC, 105, 105, 0, 0); //TODO: make this a method
+						cv.initDefault(newC);
 					}else{
-						cv = new ChunkEcoValues(newC);
+						cv.initDefault(newC);
 					}
 					
 					if(cv.getEcoBalance() != 0){

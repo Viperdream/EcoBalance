@@ -1,9 +1,5 @@
 package com.github.ecobalance;
 
-import com.github.ecobalance.util.CalcEcoValues;
-import com.github.ecobalance.util.ChunkEcoValuesData;
-import com.google.gson.Gson;
-
 import net.minecraft.world.chunk.Chunk;
 
 public class ChunkEcoValues {
@@ -33,15 +29,15 @@ public class ChunkEcoValues {
 	public Chunk chunk;
 	public String coords;
 	
-	public double passiveFactor; 
-	public double originalPassive;
-	public double activePollution;
-	public double activeEco;
-	public double neighborIndex;
+	public Double passiveFactor; 
+	public Double originalPassive;
+	public Double activePollution;
+	public Double activeEco;
 	
-	public double ecoBalance;
+	public Double neighborIndex;
+	public Double ecoBalance;
 	
-	ChunkEcoValuesData data;
+	//ChunkEcoValuesData data;
 	
 	/*public int pollutionVal; //value that disadvantages the chunk, max 100
 	public int greenVal = 0; //value that benefit the chunk, max 100
@@ -53,11 +49,12 @@ public class ChunkEcoValues {
 	public ChunkEcoValues(){}
 	
 	public ChunkEcoValues(Chunk chunk, 
-			double passiveFactor, double originalPassive, 
-			double activePollution, double activeEco){
+			Double passiveFactor, Double originalPassive, 
+			Double activePollution, Double activeEco){
 		
 		this.chunk = chunk;
-		this.coords = chunk.xPosition + "," + chunk.zPosition;
+		this.coords = this.chunk.xPosition + "," + this.chunk.zPosition;
+		
 		this.passiveFactor = passiveFactor;
 		this.originalPassive = originalPassive;
 		this.activePollution = activePollution;
@@ -68,38 +65,28 @@ public class ChunkEcoValues {
 		
 	}
 	
-	public ChunkEcoValues(Chunk chunk){
-		this.chunk = chunk;
-		this.coords = chunk.xPosition + "," + chunk.zPosition;
-		
-		data = ChunkEcoValuesData.get(chunk.worldObj,coords);
-		String json = data.getJson();
-		
-		this.convertToValues(json);
-	}
-	
 	public Chunk getChunk(){
 		return this.chunk;
 	}
 	public String getCoords(){
 		return this.coords;
 	}
-	public double getPassiveFactor(){
+	public Double getPassiveFactor(){
 		return this.passiveFactor;
 	}
-	public double getOriginalPassive(){
+	public Double getOriginalPassive(){
 		return this.originalPassive;
 	}
-	public double getActivePollution(){
+	public Double getActivePollution(){
 		return this.activePollution;
 	}
-	public double getActiveEco(){
+	public Double getActiveEco(){
 		return this.activeEco;
 	}
-	public double getNeighborIndex(){
+	public Double getNeighborIndex(){
 		return this.neighborIndex;
 	}
-	public double getEcoBalance(){
+	public Double getEcoBalance(){
 		this.calcEcoBalance();
 		return this.ecoBalance;
 	}
@@ -110,28 +97,31 @@ public class ChunkEcoValues {
 	public void setCoords(String coords){
 		this.coords = coords;
 	}
-	public void setPassiveFactor(double pf){
+	public void setPassiveFactor(Double pf){
 		this.passiveFactor = pf;
 	}
-	public void setOriginalPassive(double op){
+	public void setOriginalPassive(Double op){
 		this.originalPassive = op;
 	}
-	public void setActivePollution(double ap){
+	public void setActivePollution(Double ap){
 		this.activePollution = ap;
 	}
-	public void setActiveEco(double ae){
+	public void setActiveEco(Double ae){
 		this.activeEco = ae;
 	}
-	public void setNeighborIndex(double ni){
+	public void setNeighborIndex(Double ni){
 		this.neighborIndex = ni;
 	}
-	public void setEcoBalance(double eb){
+	public void setEcoBalance(Double eb){
 		this.ecoBalance = eb;
 	}
 	
-	public void addActivePollution(double pollution){
+	public void addActivePollution(Double pollution, Chunk c){
 		this.activePollution = this.activePollution + pollution;
-		data.markDirty();
+		
+		if(this.chunk == null){
+			this.chunk = c;
+		}
 	}
 	
 	public void calcEcoBalance(){
@@ -145,115 +135,15 @@ public class ChunkEcoValues {
 		if (this.ecoBalance <= 0){ //can't be lower than 0.1
 			this.ecoBalance = 0.1;
 		}else if(this.ecoBalance > 200){ //can't be larger than 200
-			this.ecoBalance = 200;
-		}
-	}
-	
-	public String convertToJson(ChunkEcoValues cv){
-		Gson gson = new Gson();
-		String jsonCv = gson.toJson(cv);
-		
-		System.out.println(jsonCv); //debug
-		return jsonCv;
-	}
-	public void convertToValues(String json){
-		System.out.println(json); //debug
-		
-		if(json == null){
-			this.passiveFactor = 100;
-			this.originalPassive = 100;
-			this.activeEco = 0;
-			this.activePollution = 0;
-			
-			this.calcEcoBalance();
-			//this.neighborIndex = CalcEcoValues.calcNeighborIndex(this.chunk, this.coords);
-		}else{
-			Gson gson = new Gson();
-			ChunkEcoValues cv = gson.fromJson(json, ChunkEcoValues.class);
-			
-			this.chunk = cv.chunk;
-			this.coords = cv.coords;
-			this.passiveFactor = cv.passiveFactor;
-			this.originalPassive = cv.originalPassive;
-			this.activePollution = cv.activePollution;
-			this.activeEco = cv.activeEco;
-			
-			this.calcEcoBalance();
-			//this.neighborIndex = CalcEcoValues.calcNeighborIndex(this.chunk, this.coords);
+			this.ecoBalance = 200.0;
 		}
 	}
 	
 	public void initDefault(Chunk c){
 		this.chunk = c;
-		this.passiveFactor = 100;
-		this.originalPassive = 100;
-		this.activeEco = 0;
-		this.activePollution = 0;
+		this.passiveFactor = 100.0;
+		this.originalPassive = 100.0;
+		this.activeEco = 0.0;
+		this.activePollution = 0.0;
 	}
-	
-	
-	/*public ChunkEcoValues(Chunk chunk){
-		this.chunk = chunk;
-		this.coords = chunk.xPosition + "," + chunk.zPosition;
-		
-		if(Pollution.pollutedChunks.containsKey(coords)){
-			ChunkEcoValues cv = Pollution.pollutedChunks.get(coords);
-			
-			try{
-				this.greenVal = cv.getGreenVal();
-				this.originVal = cv.getOriginVal();
-				this.ecoPercent = cv.getEcoPercent();
-				this.neighborBonus = cv.getNeighbourBonus();
-				this.pollutionVal = cv.getPollution();
-			}catch (Exception e){
-				System.out.println(e.getMessage());
-				Pollution.pollutedChunks.remove(coords);
-			}
-			//pollutionVal = Pollution.pollutedChunks.get(coords);
-		}
-		//data = PollutionData.get(chunk.worldObj, coords);
-		
-		//this.pollution = data.getPollution();
-	}*/
-	/*public ChunkEcoValues(Chunk chunk, int pollution){
-		this.chunk = chunk;
-		this.pollutionVal = pollution;
-	}
-	
-	public int getPollution(){
-		return this.pollutionVal;
-	}
-	/*public Chunk getChunk(){
-		return this.chunk;
-	}
-	public int getGreenVal(){
-		return this.greenVal;
-	}
-	public int getOriginVal(){
-		return this.originVal;
-	}
-	public int getEcoPercent(){
-		return this.ecoPercent;
-	}
-	public int getNeighbourBonus(){
-		return this.neighborBonus;
-	}
-	
-	public void setPollution(int pollution){
-		this.pollutionVal = pollution;
-		
-		Pollution.pollutedChunks.put(coords, pollution);
-		//data.changePollution(pollution);
-	}
-	
-	public void addPollution(int pollution){
-		this.pollutionVal = this.pollutionVal + pollution;
-		
-		Pollution.pollutedChunks.put(coords, this.pollutionVal);
-		
-		//data.changePollution(pollution);
-	}
-	public void calcEcoBalance(){
-		
-	}*/
 }
